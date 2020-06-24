@@ -7,9 +7,6 @@ if __name__ == '__main__':
     for cog in cogs:
         bot.load_extension(cog)
 @bot.event
-async def on_message(ctx):
-    raise EVERYTHING_IS_NOT_DONE_YET_ERROR()
-@bot.event
 async def on_ready():
     print(f'logged in as {bot.user.name}')
 bot.run(token)
