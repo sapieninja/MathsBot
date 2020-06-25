@@ -34,7 +34,8 @@ class equation:
                     except:
                         break
                     location += 1
-                print(str(solution[solution.index('^')+1:location]))
+                exponent = int(solution[solution.index('^')+1:location]))
+                
                 
 
         except:
