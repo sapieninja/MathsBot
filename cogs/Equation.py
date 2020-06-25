@@ -34,8 +34,7 @@ class equation:
             if '(' in solution: #brackets
                 sub_equation = solution[solution.index('(') + 1: solution.index(')')]
                 sub_equation = self.parse_value(sub_equation) #need to work out the value of whatever is in the brackets
-                solution = solution[:solution.index('(')] + str(sub_equation) + solution[solution.index(')')+1:
-                ]
+                solution = solution[:solution.index('(')] + f"{sub_equation:.20f}" + solution[solution.index(')')+1:]
             elif '^' in solution: #indices
                 base,exponent,location_base,location_exponent = get_operands(solution,'^')
                 print(base,exponent)
@@ -45,19 +44,19 @@ class equation:
             elif '/' in solution:#division
                 dividend,divisor,location_dividend,location_divisor = get_operands(solution,'/')
                 answer = dividend/divisor
-                solution = solution[:location_dividend] + f"{answer:.20f}" + solution[location_divisor:]
+                solution = solution[:location_dividend+1] + f"{answer:.20f}" + solution[location_divisor:]
             elif '*' in solution:#multiplication
                 no_1,no_2,location_1,location_2 = get_operands(solution,'*')
                 answer = no_1*no_2
-                solution = solution[:location_1] + f"{answer:.20f}" + solution[location_two:]
+                solution = solution[:location_1+1] + f"{answer:.20f}" + solution[location_2:]
             elif '+' in solution:#addition
                 no_1,no_2,location_1,location_2 = get_operands(solution,'+')
                 answer = no_1+no_2
-                solution = solution[:location_1] + f"{answer:.20f}" + solution[location_two:]
+                solution = solution[:location_1+1] + f"{answer:.20f}" + solution[location_2:]
             elif '-' in solution:#subtraction
                 no_1,no_2,location_1,location_2 = get_operands(solution,'*')
                 answer = no_1-no_2
-                solution = solution[:location_1] + f"{answer:.20f}" + solution[location_two:]
+                solution = solution[:location_1+1] + f"{answer:.20f}" + solution[location_2:]
         except:
             solution = 0
         try:
@@ -65,6 +64,8 @@ class equation:
         except:
             return self.parse_value(solution)
         return float(solution)
+    def __str__(self):
+        return f"{self.value:.10f}"
     def __init__(self,text):
         self.text = text
         self.value = self.parse_value(self.text)
