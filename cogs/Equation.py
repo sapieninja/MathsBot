@@ -27,7 +27,14 @@ class equation:
                         break
                     location -= 1
                 base = int(solution[location+1:solution.index('^')])
-                location = solution.index('^')-1
+                location = solution.index('^')+1
+                while location < len(solution)-1:
+                    try:
+                        int(solution[location])
+                    except:
+                        break
+                    location += 1
+                print(str(solution[solution.index('^')+1:location]))
                 
 
         except:
@@ -37,5 +44,5 @@ class equation:
         self.text = text
         self.value = self.parse_value(self.text)
 if __name__ == "__main__":
-    equation = equation('asdf10000^5asdfas')
+    equation = equation('asdf10000^501012asdfas')
     print(equation.value)
