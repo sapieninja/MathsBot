@@ -65,10 +65,10 @@ class equation:
             return self.parse_value(solution)
         return float(solution)
     def __str__(self):
-        return f"{self.value:.10f}"
+        return f"{self.value:.2f}"
+    def __add__(self,other):
+        return equation('(' + self.text + ')' + '+' + '(' + self.text + ')')
     def __init__(self,text):
         self.text = text
         self.value = self.parse_value(self.text)
-if __name__ == "__main__":
-    equation = equation('1000000*(533^2)+24')
-    print(equation.value)
+
