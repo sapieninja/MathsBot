@@ -37,7 +37,6 @@ class equation:
                 solution = solution[:solution.index('(')] + f"{sub_equation:.20f}" + solution[solution.index(')')+1:]
             elif '^' in solution: #indices
                 base,exponent,location_base,location_exponent = get_operands(solution,'^')
-                print(base,exponent)
                 answer = maths.pow(base,exponent) #has floating point support whcih is good (complete accuracy of values is not essential
                 #now we need to splice this value back into the equation as a whole
                 solution = solution[:location_base+1] + f"{answer:.20f}" + solution[location_exponent:]
@@ -54,21 +53,27 @@ class equation:
                 answer = no_1+no_2
                 solution = solution[:location_1+1] + f"{answer:.20f}" + solution[location_2:]
             elif '-' in solution:#subtraction
-                no_1,no_2,location_1,location_2 = get_operands(solution,'*')
-                answer = no_1-no_2
-                solution = solution[:location_1+1] + f"{answer:.20f}" + solution[location_2:]
+                try:
+                    float(solution)
+                except:
+                    no_1,no_2,location_1,location_2 = get_operands(solution,'-')
+                    print(no_1,no_2)
+                    answer = no_1-no_2
+                    solution = solution[:location_1+1] + f"{answer:.20f}" + solution[location_2:]
         except:
-            solution = 0
+            raise RuntimeError('Something went wrong calculating the value of your number. Remember to format with all necessary symbols and make sure you are not trying to raise something to an extremely high power')
         try:
             float(solution)
         except:
             return self.parse_value(solution)
         return float(solution)
     def __str__(self):
-        return f"{self.value:.2f}"
+        return f"{self.value:.10f}"
     def __add__(self,other):
         return equation('(' + self.text + ')' + '+' + '(' + self.text + ')')
     def __init__(self,text):
         self.text = text
         self.value = self.parse_value(self.text)
-
+if __name__ == '__main__':
+    new_equation = equation('10^100')
+    print(new_equation)
