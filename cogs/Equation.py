@@ -68,7 +68,7 @@ class equation:
             return self.parse_value(solution)
         return float(solution)
     def __str__(self):
-        return f"{self.value:.10f}"
+        return f"{self.value:.5f}"
     def __add__(self,other):
         return equation('(' + self.text + ')' + '+' + '(' + self.text + ')')
     def __init__(self,text):
