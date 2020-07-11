@@ -29,8 +29,5 @@ class reactionroles(commands.Cog):#defines a new class inheriting from commands.
         if role is not None:
             member = guild.get_member(payload.user_id) #payload does not have a member subclass in this occasion-
             await member.remove_roles(role)
-    @commands.command()
-    async def chicken(self,ctx):
-        await ctx.send('ping')
 def setup(bot):
     bot.add_cog(reactionroles(bot))
