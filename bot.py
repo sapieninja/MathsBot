@@ -40,7 +40,12 @@ async def removecog(ctx,cogname):
     except:
         raise ValueError('You did something wrong idk')
     with open("loadedcogs.json","w") as cogs_file:
-        json.dump(cogs,cogs_file)          
+        json.dump(cogs,cogs_file)         
+@bot.command()
+@commands.has_role('4x4(mods)')
+async def refreshcog(ctx,cogname):
+    removecog(ctx,cogname)
+    addcog(ctx,cogname)
     
 bot.run(token)
         
