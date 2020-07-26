@@ -57,7 +57,6 @@ class equation:
                     float(solution)
                 except:
                     no_1,no_2,location_1,location_2 = get_operands(solution,'-')
-                    print(no_1,no_2)
                     answer = no_1-no_2
                     solution = solution[:location_1+1] + f"{answer:.20f}" + solution[location_2:]
         except:
