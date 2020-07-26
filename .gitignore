@@ -6,3 +6,4 @@ info.json
 cogs/__pycache__/infocommands.cpython-38.pyc
 cogs/__pycache__/ping.cpython-38.pyc
 cogs/__pycache__/pingcommand.cpython-38.pyc
+cogs/__pycache__/clearcommand.cpython-38.pyc
