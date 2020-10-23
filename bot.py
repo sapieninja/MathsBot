@@ -5,7 +5,6 @@ bot = commands.Bot(command_prefix='!',description="Bot to help with some functio
 with open('info.json','r') as info_file:
     info = json.load(info_file) 
 token = info['token']
-reaction_message_id = 100
 with open("loadedcogs.json",'r') as cogs_file:
     cogs = json.load(cogs_file)
 if __name__ == '__main__':
@@ -15,7 +14,7 @@ if __name__ == '__main__':
 async def on_ready():
     print(f'logged in as {bot.user.name}')
 @bot.command()
-@commands.has_role('4x4(mods)')
+@commands.has_role('4x4 (mods)')
 async def addcog(ctx,cogname):
     with open("loadedcogs.json","r") as cogs_file:
         cogs = json.load(cogs_file)
@@ -29,7 +28,7 @@ async def addcog(ctx,cogname):
     with open("loadedcogs.json",'w') as cogs_file:
         json.dump(cogs,cogs_file)
 @bot.command()
-@commands.has_role('4x4(mods)')
+@commands.has_role('4x4 (mods)')
 async def removecog(ctx,cogname):
     with open("loadedcogs.json","r") as cogs_file:
         cogs = json.load(cogs_file)
@@ -42,7 +41,7 @@ async def removecog(ctx,cogname):
     with open("loadedcogs.json","w") as cogs_file:
         json.dump(cogs,cogs_file)         
 @bot.command()
-@commands.has_role('4x4(mods)')
+@commands.has_role('4x4 (mods)')
 async def refreshcog(ctx,cogname):
     removecog(ctx,cogname)
     addcog(ctx,cogname)

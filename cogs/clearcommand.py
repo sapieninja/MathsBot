@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from cogs.equation import equation as equation
 import asyncio
 class clearcommand(commands.Cog):#defines a new class inheriting from commands.Cog
     "simple command that can delete messages "
@@ -8,8 +7,7 @@ class clearcommand(commands.Cog):#defines a new class inheriting from commands.C
     async def clear(self,ctx,no: int):
         if no < 1:
             raise ValueError()
-        async for message in ctx.channel.history(limit = no+1):
-            await message.delete()
+        await ctx.channel.purge(limit = no + 1)
         message = await ctx.send(f"Deleted {no+1} messages in this channel")
         await asyncio.sleep(10)
         await message.delete()

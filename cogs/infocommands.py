@@ -1,10 +1,9 @@
 import discord
 from discord.ext import commands
-from cogs.equation import equation as equation
 import json
 class infocommands(commands.Cog):#defines a new class inheriting from commands.Cog
     "allows info commands that just send a certain message when called"
-    @commands.has_role('4x4(mods)')
+    @commands.has_role('4x4 (mods)')
     @commands.group()
     async def info(self,ctx):
         if ctx.invoked_subcommand is None:
