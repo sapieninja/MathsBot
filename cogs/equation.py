@@ -21,7 +21,18 @@ class equation:
                         break
                 location_operand_two += 1
             operand_two = float(solution[solution.index(operator)+1:location_operand_two])
-            return operand_one,operand_two,location_operand_one,location_operand_two            
+            return operand_one,operand_two,location_operand_one,location_operand_two
+
+        def find_bracket_two(location_bracket_one, solution):
+            no_open = 0
+            no_closed = 0
+            for x in range(location_bracket_one, len(solution)):
+                if solution[x] == '(':
+                    no_open += 1
+                if solution[x] == ')':
+                    no_closed += 1
+                    if no_open == no_closed:
+                        return x
         #BIDMAS
         #brackets
         #indices
@@ -32,9 +43,12 @@ class equation:
         #do 1 each time and then call itself
         try:#i'm lazy so big try except
             if '(' in solution: #brackets
-                sub_equation = solution[solution.index('(') + 1: solution.index(')')]
+                location_bracket_one = solution.index('(')
+                location_bracket_two = find_bracket_two(location_bracket_one, solution)
+                sub_equation = solution[location_bracket_one +1:location_bracket_two]
+                #sub_equation = solution[solution.index('('): solution.index(')')]
                 sub_equation = self.parse_value(sub_equation) #need to work out the value of whatever is in the brackets
-                solution = solution[:solution.index('(')] + f"{sub_equation:.20f}" + solution[solution.index(')')+1:]
+                solution = solution[:location_bracket_one] + f"{sub_equation:.20f}" + solution[location_bracket_two+1:]
             elif '^' in solution: #indices
                 base,exponent,location_base,location_exponent = get_operands(solution,'^')
                 answer = maths.pow(base,exponent) #has floating point support whcih is good (complete accuracy of values is not essential
@@ -74,5 +88,5 @@ class equation:
         self.text = text
         self.value = self.parse_value(self.text)
 if __name__ == '__main__':
-    new_equation = equation('10^100')
+    new_equation = equation('((1)+1)*5')
     print(new_equation)
